@@ -9,8 +9,8 @@ class Task1 {
     int id;
     int processingTime;
 
-    // Constructor for Task 1 (processing time only)
-    public Task(int id, int processingTime) {
+    // Constructor for Task1 (processing time and id)
+    public Task1(int id, int processingTime) {
         this.id = id;
         this.processingTime = processingTime;
     }
@@ -20,7 +20,7 @@ public class TaskSchedulerSPT {
 
     public static void main(String[] args) {
         // Define the priority queue (min-heap) to sort tasks by processing time
-        PriorityQueue<Task> taskQueue = new PriorityQueue<>(Comparator.comparingInt(t -> t.processingTime));
+        PriorityQueue<Task1> taskQueue = new PriorityQueue<>(Comparator.comparingInt(t -> t.processingTime));
 
         // Read the task1-input.txt file and add tasks to the queue
         try {
@@ -34,7 +34,7 @@ public class TaskSchedulerSPT {
                 int processingTime = Integer.parseInt(parts[1]);
                 
                 // Add each task to the priority queue
-                taskQueue.add(new Task(id, processingTime));
+                taskQueue.add(new Task1(id, processingTime));
             }
         } catch (IOException e) {
             System.out.println("Error reading input file: " + e.getMessage());
@@ -49,7 +49,7 @@ public class TaskSchedulerSPT {
         // Print the execution order and compute average completion time
         System.out.print("Execution order: [");
         while (!taskQueue.isEmpty()) {
-            Task task = taskQueue.poll(); // Retrieve the task with the smallest processing time
+            Task1 task = taskQueue.poll(); // Retrieve the task with the smallest processing time
             currentTime += task.processingTime;
             totalCompletionTime += currentTime;
             System.out.print(task.id + (taskQueue.isEmpty() ? "]\n" : ", "));
@@ -60,3 +60,4 @@ public class TaskSchedulerSPT {
         System.out.println("Average completion time: " + avgCompletionTime);
     }
 }
+
